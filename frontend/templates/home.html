@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentiment & Sales Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Load Chart.js from CDN FIRST -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- Then load your custom JS -->
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
+        <script src="{{ url_for('static', filename='mostReviewed.js') }}"></script>
+
+    </head>
+
+    
+
+    <body>
+        
+
+        <!-- Header -->
+            <header>
+            <h1>Sentiment-Driven Product Recommendation & Sales Insight Dashboard</h1>
+            <p class="subheading">Powered by Sentiment Analysis of Amazon's Health and Personal Care Product Reviews</p>
+            </header>
+        <div>
+            <form action="product_details" method="get">
+                <label for="productSearch">🔍 Select Product:</label>
+                <input list="productList" id="productSearch" name="productTitle" placeholder="Type or select a product" required />
+                <datalist id="productList"></datalist>
+                <button type="submit">Search</button>
+            </form>
+
+        
+            
+        </div>
+        <div style="display: flex; margin-left: auto; justify-content: space-between; margin-bottom: 20px; margin-right: 15px;">
+                    <a href="/get_mostreviewed" style="display: inline-block; margin-top: 20px;">
+                ⭐ Show Most Reviewed Product
+                </a>
+        </div>
+
+    
+        <div class="dashboard-container">
+            <!-- Top Stats -->
+            
+            <aside class="kpi-panel">
+                <div class="kpi-card">
+                <h3><i class="fas fa-star">Total Reviews</i></h3>
+                <p id="totalReviews">--</p>
+                </div>
+                
+                <div class="kpi-card green">
+                <h3><i class="fas fa-star">Positive Reviews</i></h3>
+                <p id="positiveReviews">--</p>
+                </div>
+                <div class="kpi-card yellow">
+                <h3><i class="fas fa-star">Neutral Reviews</i></h3>
+                <p id="neutralReviews">--</p>
+                </div>
+                <div class="kpi-card red">
+                <h3><i class="fas fa-star">Negative Reviews</i></h3>
+                <p id="negativeReviews">--</p>
+                </div>
+                <div class="kpi-card gold">
+                <h3><i class="fas fa-star">Products with 5★ Rating</i></h3>
+                <p id="rating5Count">...</p>
+                </div>
+            </aside>
+        <main class="main-dashboard">
+            <div class="chart-row">       
+            <div class="chart-card">
+                        <h3>Sentiment Distribution</h3>
+                        <canvas id="sentimentChart"></canvas>
+                        <button onclick="downloadChart('sentimentChart', 'sentiment_chart.png')">⬇ Export Chart</button>
+            </div>
+            <div class="chart-card">
+                        <h3>Rating Distribution</h3>
+                        <canvas id="ratingChart" height="350px"></canvas>
+                        <button onclick="downloadChart('ratingChart', 'ratingChart.png')">⬇ Export Chart</button>
+            </div>
+            <div class="chart-card">
+                        <h3>Verified vs Unverified Reviews</h3>
+                        <canvas id="verifiedChart"></canvas>
+                        <button onclick="downloadChart('verifiedChart', 'verifiedChart.png')">⬇ Export Chart</button>
+            </div>
+            </div> 
+            </div>
+                <div class="chart-row">
+                    <div class="chart-card">
+                        <h3>Helpful Votes Distribution</h3>
+                        <canvas id="helpfulChart"></canvas>
+                        <button onclick="downloadChart()">⬇ Export Chart</button>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Scatter Plot: Price vs Rating</h3>
+                        <canvas id="priceRatingScatterChart"></canvas>
+                        <button onclick="downloadChart('priceRatingScatterChart', 'priceRatingScatterChart.png')">⬇ Export Chart</button>
+                    </div>
+                    
+                    
+                    <div class="chart-card">
+                        <h3>Top 5 Positive and Negative Review Counts</h3>
+                        <canvas id="sentimentExtremesChart"></canvas>
+                        <button onclick="downloadChart('sentimentExtremesChart', 'sentimentExtremesChart.png')">⬇ Export Chart</button>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    
+                    
+                    <div class="chart-card">
+                        <h3>Average Rating per Price Range</h3>
+                        <canvas id="ratingByPriceRangeChart"></canvas>
+                        <button onclick="downloadChart('ratingByPriceRangeChart', 'ratingByPriceRangeChart.png')">⬇ Export Chart</button>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Review Sentiment by Store</h3>
+                        <canvas id="storeSentimentChart"></canvas>
+                        <button onclick="downloadChart('storeSentimentChart', 'storeSentimentChart.png')">⬇ Export Chart</button>
+                    </div>
+            
+                    <div class="chart-card">
+                        <h3>Total Reviews per Store</h3>
+                        <canvas id="storeAvgRatingChart"></canvas>
+                        <button onclick="downloadChart('storeAvgRatingChart', 'storeAvgRatingChart.png')">⬇ Export Chart</button>
+                    </div>
+                </div>
+            </main>
+        
+        <button class="floating-btn" onclick="scrollToTop()" title="Back to Top">
+        ↑ 
+        </button>
+        <footer class="footer">
+        <div class="footer-container">
+            
+            <h3>Product Insights</h3>
+            <p>Turning customer reviews into smart product decisions with ML and visualization.</p>
+            
+        
+
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Product Insights. Built with ❤️ using Python, Flask & Chart.js</p>
+        </div>
+        </footer>
+
+    
+</body>
+</html>

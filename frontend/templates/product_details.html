@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.productTitle }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='detailstyle.css') }}">
+    <!-- At the bottom of your product_details.html -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Then load your custom JS -->
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
+    
+        <script src="{{ url_for('static', filename='mostReviewed.js') }}"></script>
+    </head>
+    <body class="bg-light">
+
+    <div class="container py-5">
+        <div class="card shadow-lg">
+        <div class="card-body">
+            <h2 class="card-title text-primary">{{ product.productTitle }}</h2>
+            <hr>
+
+            <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-6">
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Category:</strong> {{ product.category }}</li>
+                <li class="list-group-item"><strong>Store:</strong> {{ product.store }}</li>
+                <li class="list-group-item"><strong>Price:</strong> ${{ product.price }}</li>
+                <li class="list-group-item"><strong>Rating:</strong> ⭐ {{ product.rating }} / 5</li>
+                <li class="list-group-item"><strong>Average Rating:</strong> {{ product.averageRating }}</li>
+                <li class="list-group-item"><strong>Review Count:</strong> {{ product.reviewCount }}</li>
+                <li class="list-group-item"><strong>Helpful Votes:</strong> {{ product.helpfulVote }}</li>
+                </ul>
+            </div>
+
+            <!-- Right Column -->
+        
+            <div class="col-md-6">
+                <div class="mb-3">
+                <h5 class="text-success">✅ Verified Purchase:</h5>
+                <p>{{ 'Yes' if product.verifiedPurchase else 'No' }}</p>
+                </div>
+                <div class="mb-3">
+                <h5 class="text-info">💬 Review:</h5>
+                <blockquote class="blockquote">
+                    {{ product.reviewText }}
+                </blockquote>
+                </div>
+                <div class="mb-3">
+                <h5 class="text-warning">🧠 Sentiment:</h5>
+                <span class="badge 
+                    {% if product.sentimentLabel == 'positive' %} bg-success
+                    {% elif product.sentimentLabel == 'neutral' %} bg-warning text-dark
+                    {% else %} bg-danger 
+                    {% endif %}">
+                    {{ product.sentimentLabel }}
+                </span>
+                </div>
+                <div class="mb-3">
+                    <h5 class="text-info">💬 Product Detail Description:</h5>
+                    <blockquote class="blockquote">
+                    {{ product.details }}
+                    </blockquote>
+                </div>
+            </div>
+            
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-end mt-4">
+            <a href="/" class="btn btn-outline-primary">← Back to Dashboard</a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>

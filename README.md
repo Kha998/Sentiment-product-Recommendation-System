@@ -96,3 +96,20 @@ The system follows a modular and scalable architecture:
 - JavaScript (Chart.js / D3.js)
 
 
+---
+
+## Key Features
+- Automated sentiment classification of customer reviews
+- Comparative evaluation of multiple ML algorithms
+- Sentiment-driven product ranking and recommendation logic
+- Interactive dashboards for sentiment and sales insights
+- Business-oriented insights derived from customer feedback
+
+---
+
+## How to Run the Project
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/Sentiment-product-Recommendation-System.git
+

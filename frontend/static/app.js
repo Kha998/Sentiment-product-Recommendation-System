@@ -1,4 +1,7 @@
 // app.js
+
+# Load your prepared dataset
+df = pd.read_json('data/final_dashboard_dataset.json')
 // ✅ Load product titles into the datalist when the page loads
 function loadProductTitles() {
     fetch('http://127.0.0.1:5000/get_product_titles')
